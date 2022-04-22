@@ -1,0 +1,18 @@
+.card{
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.image{
+    background-color: #eaeaea;
+    padding: 10px;
+}
+.text{
+    color: rgb(46, 106, 158);
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
