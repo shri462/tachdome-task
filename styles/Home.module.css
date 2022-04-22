@@ -28,7 +28,7 @@
   display: grid;
   grid-template-columns: auto auto;
   gap: 10px 20px;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .card_container {
@@ -71,16 +71,24 @@
       'left'
       'main'
       'footer';
+  padding: 0;
+  gap: 10px;
+
   }
   .cards{
     grid-template-columns: 600px;
     justify-content: center;
+    padding: 0;
+    margin: 10px;
   }
   .aside{
     position: relative;
     height: auto;
     padding: 50px 0;
-    width: 600px;
-    margin: auto;
+    margin: 10px;
+  }
+  .buttons{
+  grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
   }
 }

@@ -11,8 +11,8 @@ function Card({ data }) {
           src={imgsrc}
           layout="responsive"
           alt="image"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
         />
       </p>
 
