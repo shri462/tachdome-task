@@ -10,3 +10,14 @@
     background-color: rgb(124, 253, 2);
 
 }
+
+@media (max-width: 700px) {
+    .button{
+        padding:  10px 20px;
+        border: 0px ;
+
+        border-radius: 10px;
+        font-size: 30px;
+    }
+
+}

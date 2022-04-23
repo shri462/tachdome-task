@@ -86,9 +86,9 @@
     height: auto;
     padding: 50px 0;
     margin: 10px;
+    font-size: 30px;
   }
-  .buttons{
-  grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
+  .header{
+    font-size: 34px;
   }
 }
