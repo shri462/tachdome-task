@@ -3,27 +3,25 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
 import Card from "../components/Card";
+import Filters from "../components/Filters";
 import styles from "../styles/Home.module.css";
 
-const YEAR = [
-  2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018,
-  2019, 2020,
-];
-
-export default function Home() {
+export default function Home(props) {
   const [data, setData] = useState([]);
-
-  async function programs() {
-    const response = await fetch(
-      "https://api.spacexdata.com/v3/launches?limit=100"
-    );
-    const data = await response.json();
-    setData(data);
-  }
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    programs();
+    setData(props.data);
+    setFilteredData(props.data);
   }, []);
+
+  async function filter() {
+    const response = await fetch(
+      "https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=2014"
+    );
+    const data = await response.json();
+    setFilteredData(data);
+  }
 
   return (
     <div className={styles.container}>
@@ -37,56 +35,14 @@ export default function Home() {
       </header>
 
       <aside className={styles.aside}>
-        <h3>Filters</h3>
-        <div
-          style={{
-            borderBottom: "1px solid",
-            padding: "5px",
-            marginBottom: "10px",
-          }}
-        >
-          Launch Year
-        </div>
-        <div className={styles.buttons}>
-          {YEAR.map((year) => (
-            <Button key={year} value={year} />
-          ))}
-        </div>
-        <div
-          style={{
-            borderBottom: "1px solid",
-            padding: "5px",
-            marginBottom: "10px",
-          }}
-        >
-          Successful Launch
-        </div>
-        <div className={styles.buttons}>
-          <Button value="True" />
-          <Button value="False" />
-        </div>
-        <div
-          style={{
-            borderBottom: "1px solid",
-            padding: "5px",
-            marginBottom: "10px",
-          }}
-        >
-          Successful Landing
-        </div>
-        <div className={styles.buttons}>
-          <Button value="True" />
-          <Button value="False" />
-        </div>
+        <Filters data={data} onFilter={filter} />
       </aside>
 
-      {/* <div className={styles.card_container}> */}
       <div className={styles.cards}>
-        {data.map((data) => (
+        {filteredData.map((data) => (
           <Card data={data} key={data.flight_number} />
         ))}
       </div>
-      {/* </div> */}
 
       <footer className={styles.footer}>
         <a href="" target="_blank" rel="noopener noreferrer">
@@ -95,4 +51,13 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await fetch(
+    "https://api.spacexdata.com/v3/launches?limit=100"
+  );
+  const data = await response.json();
+
+  return { props: { data } };
 }

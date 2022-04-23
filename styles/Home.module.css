@@ -24,12 +24,7 @@
   
 }
 
-.buttons{
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 10px 20px;
-  justify-content: space-around;
-}
+
 
 .card_container {
   left: 10%;
@@ -89,6 +84,6 @@
     font-size: 30px;
   }
   .header{
-    font-size: 34px;
+    font-size: 32px;
   }
 }
