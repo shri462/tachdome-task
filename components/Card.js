@@ -7,29 +7,33 @@ function Card({ data }) {
   return (
     <div className={styles.card}>
       <p className={styles.image}>
-        <Image
-          src={imgsrc}
-          layout="responsive"
-          alt="image"
-          width={100}
-          height={100}
-        />
+        {imgsrc ? (
+          <Image
+            src={imgsrc}
+            layout="responsive"
+            alt="image"
+            width={100}
+            height={100}
+          />
+        ) : (
+          "Image not available"
+        )}
       </p>
 
       <p>
-        <section className={styles.text}>
+        <span className={styles.text}>
           <strong>
             {data.mission_name}&nbsp;#{data.flight_number}
           </strong>
-        </section>
+        </span>
       </p>
-      <p>
+      <div>
         <strong>
           {" "}
           Mission Ids:
           <br />
         </strong>
-        <section className={styles.text}>
+        <span className={styles.text}>
           {data.mission_id.length > 0
             ? data.mission_id.map((d) => (
                 <ul key={d}>
@@ -37,26 +41,26 @@ function Card({ data }) {
                 </ul>
               ))
             : "Not available"}
-        </section>
-      </p>
+        </span>
+      </div>
       <p className={styles.flex}>
         <strong> Launch Year:</strong>
-        <section className={styles.text}>{data.launch_year}</section>
+        <span className={styles.text}>{data.launch_year}</span>
       </p>
 
       <p className={styles.flex}>
         <strong>Successful Launch:</strong>{" "}
-        <section className={styles.text}>
+        <span className={styles.text}>
           {data.launch_success ? "Successful" : "Failed"}
-        </section>
+        </span>
       </p>
       <p className={styles.flex}>
         <strong>Successful Landing:</strong>{" "}
-        <section className={styles.text}>
+        <span className={styles.text}>
           {data.rocket.first_stage.cores[0].land_success
             ? "Successful"
             : "Failed"}
-        </section>
+        </span>
       </p>
     </div>
   );

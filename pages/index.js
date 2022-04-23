@@ -1,26 +1,59 @@
 import Head from "next/head";
 import Image from "next/image";
+import { getData } from "./api";
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
 import Card from "../components/Card";
 import Filters from "../components/Filters";
 import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
 
 export default function Home(props) {
-  const [data, setData] = useState([]);
+  const router = useRouter();
+  const [dataO, setDataO] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    setData(props.data);
-    setFilteredData(props.data);
+    setFilteredData(props.jsonData);
+    setDataO(props.jsonData);
+    router.push("/", "/launches?limit=100", { shallow: true });
   }, []);
 
-  async function filter() {
+  async function filterYear(value, launch, land) {
     const response = await fetch(
-      "https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=2014"
+      `https://api.spacexdata.com/v3/launches?limit=100&launch_success=${launch}&land_success=${land}&launch_year=${value}`
+    );
+    const data = await response.json();
+    // (filteredData) => filteredData.concat(data)
+    setFilteredData(data);
+    router.push(
+      "/",
+      `launches?limit=100&launch_success=${launch}&land_success=${land}&launch_year=${value}`,
+      { shallow: true }
+    );
+  }
+
+  async function filterLanding(land) {
+    const response = await fetch(
+      `https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=${land}`
     );
     const data = await response.json();
     setFilteredData(data);
+    router.push(
+      "/",
+      `launches?limit=100&launch_success=true&land_success=${land}`,
+      { shallow: true }
+    );
+  }
+
+  async function filterLaunch(launch) {
+    const response = await fetch(
+      `https://api.spacexdata.com/v3/launches?limit=100&launch_success=${launch}`
+    );
+    const data = await response.json();
+    setFilteredData(data);
+    router.push("/", `launches?limit=100&launch_success=${launch}`, {
+      shallow: true,
+    });
   }
 
   return (
@@ -35,7 +68,12 @@ export default function Home(props) {
       </header>
 
       <aside className={styles.aside}>
-        <Filters data={data} onFilter={filter} />
+        <Filters
+          data={dataO}
+          onFilterYear={filterYear}
+          onFilterLanding={filterLanding}
+          onFilterLaunch={filterLaunch}
+        />
       </aside>
 
       <div className={styles.cards}>
@@ -54,10 +92,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(
-    "https://api.spacexdata.com/v3/launches?limit=100"
-  );
-  const data = await response.json();
+  const jsonData = await getData();
 
-  return { props: { data } };
+  return { props: { jsonData } };
 }

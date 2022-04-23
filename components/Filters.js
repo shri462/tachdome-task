@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./Button";
 import styles from "./Filters.module.css";
 
 const YEAR = [
@@ -7,7 +6,7 @@ const YEAR = [
   2019, 2020,
 ];
 
-function Filters({ data, onFilter }) {
+function Filters({ data, onFilterYear, onFilterLanding, onFilterLaunch }) {
   return (
     <div>
       <h3>Filters</h3>
@@ -22,7 +21,14 @@ function Filters({ data, onFilter }) {
       </div>
       <div className={styles.buttons}>
         {YEAR.map((year) => (
-          <Button key={year} value={year} onClick={onFilter} />
+          <button
+            className={styles.button}
+            key={year}
+            value={year}
+            onClick={() => onFilterYear(year, true, true)}
+          >
+            {year}
+          </button>
         ))}
       </div>
       <div
@@ -35,8 +41,20 @@ function Filters({ data, onFilter }) {
         Successful Launch
       </div>
       <div className={styles.buttons}>
-        <Button value="True" />
-        <Button value="False" />
+        <button
+          onClick={(e) => onFilterLaunch(e.target.value)}
+          className={styles.button}
+          value="true"
+        >
+          True
+        </button>
+        <button
+          onClick={(e) => onFilterLaunch(e.target.value)}
+          className={styles.button}
+          value="false"
+        >
+          False
+        </button>
       </div>
       <div
         style={{
@@ -48,8 +66,20 @@ function Filters({ data, onFilter }) {
         Successful Landing
       </div>
       <div className={styles.buttons}>
-        <Button value="True" />
-        <Button value="False" />
+        <button
+          onClick={(e) => onFilterLanding(e.target.value)}
+          className={styles.button}
+          value="true"
+        >
+          True
+        </button>
+        <button
+          onClick={(e) => onFilterLanding(e.target.value)}
+          className={styles.button}
+          value="false"
+        >
+          False
+        </button>
       </div>
     </div>
   );
