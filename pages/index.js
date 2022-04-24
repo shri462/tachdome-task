@@ -9,9 +9,11 @@ import { useRouter } from "next/router";
 export default function Home({ jsonData }) {
   const router = useRouter();
   const [filteredData, setFilteredData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setFilteredData(jsonData);
+    setIsLoading(false);
   }, [jsonData]);
 
   async function filterYear(value, launch, land) {
@@ -78,9 +80,18 @@ export default function Home({ jsonData }) {
       </aside>
 
       <div className={styles.cards}>
-        {filteredData.map((data) => (
-          <Card data={data} key={data.flight_number} />
-        ))}
+        {filteredData.length == 0
+          ? "No Successful Launch and Land found."
+          : !isLoading
+          ? filteredData.map((data) => (
+              <Card data={data} key={data.flight_number} />
+            ))
+          : "Loading... Please Wait"}
+        {/* {!isLoading
+          ? filteredData.map((data) => (
+              <Card data={data} key={data.flight_number} />
+            ))
+          : "Loading... Please Wait"} */}
       </div>
 
       <footer className={styles.footer}>
