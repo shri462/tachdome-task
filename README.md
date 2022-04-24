@@ -1,6 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Performance, SEO and Accessibility
+
+### Live app on [`Vercel`](https://tachdome-task.vercel.app/)
+
+![image](https://user-images.githubusercontent.com/63785929/164965156-f2b4e4df-684c-4d7a-a84f-c2c1e532cb41.png)
+
+
+## My approch and Stack details
+
+1. I have used NextJS Framework for ReactJS.
+2. For fetching API, javascript default `fetch` method is used.
+3. For server side rendering, NextJS method `getServerSideProps()` is used.
+
+(Because of fetching large JSON file performance is getting slow. I think.)
+
+
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
@@ -32,3 +49,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+
