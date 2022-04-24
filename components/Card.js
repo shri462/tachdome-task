@@ -14,6 +14,7 @@ function Card({ data }) {
             alt="image"
             width="100px"
             height="100px"
+            priority={true}
           />
         ) : (
           "Image not available"
@@ -35,11 +36,7 @@ function Card({ data }) {
         </strong>
         <span className={styles.text}>
           {data.mission_id.length > 0
-            ? data.mission_id.map((d) => (
-                <ul key={d}>
-                  <li>{d}</li>
-                </ul>
-              ))
+            ? data.mission_id.map((d) => <span key={d}>*&nbsp;{d}</span>)
             : "Not available"}
         </span>
       </div>

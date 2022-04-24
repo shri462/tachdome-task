@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Filters.module.css";
 
 const YEAR = [
@@ -9,7 +8,7 @@ const YEAR = [
 function Filters({ data, onFilterYear, onFilterLanding, onFilterLaunch }) {
   return (
     <div>
-      <h3>Filters</h3>
+      <h2>Filters</h2>
       <div
         style={{
           borderBottom: "1px solid",
