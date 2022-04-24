@@ -11,4 +11,5 @@ export async function getData() {
 export default async function handler(req, res) {
   const jsonData = await getData();
   res.status(200).json(jsonData);
+  res.setHeader("Cache-Control", "s-mega=10");
 }

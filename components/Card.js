@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./card.module.css";
 
 function Card({ data }) {
-  const imgsrc = data.links.mission_patch;
+  const imgsrc = data.links.mission_patch_small;
   return (
     <div className={styles.card}>
       <p className={styles.image}>
@@ -12,8 +12,8 @@ function Card({ data }) {
             src={imgsrc}
             layout="responsive"
             alt="image"
-            width={100}
-            height={100}
+            width="100px"
+            height="100px"
           />
         ) : (
           "Image not available"
