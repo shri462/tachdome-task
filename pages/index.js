@@ -79,7 +79,7 @@ export default function Home({ jsonData }) {
       </aside>
 
       <div className={styles.cards}>
-        {!isLoading
+        {isLoading
           ? "Loading... Please Wait"
           : filteredData.length == 0
           ? "No Successful Launch and Land found."
